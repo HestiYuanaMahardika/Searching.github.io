@@ -1,0 +1,104 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<div class="p-3 mb-2 bg-secondary text-white">Hesti Yuana Mahardika</div>
+<div class="mx-auto" style="width: 200px;">
+  <h1> ALGORITMA<span class="badge badge-secondary">SEARCHING</span></h1>
+</div>
+
+    <img class="mw-100" src="GambarKetikan2.jpeg" alt="Max-width 50%">
+
+<style>
+    th{ 
+        cursor: pointer;
+        color:#fff;
+            }
+</style>
+
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+
+                <button type="button" class="btn btn-secondary btn-lg btn-block">Pencarian Data Diri Mahasiswa Berdasarkan Nama</h1>
+            <input id="search-input" class="form-control" type="text"> 
+                
+        </div>
+    </div>
+</div>
+
+
+<table class="table table-striped">
+    <tr  class="bg-info">
+        <th  class="bg-info" data-colname="name" data-order="desc">Nama &#9650</th>
+        <th  data-colname="number" data-order="desc">NPM &#9650</th>
+        <th  data-colname="birthdate" data-order="desc">Tempat / Tanggal Lahir &#9650</th>
+        <th  data-colname="address" data-order="desc">Alamat &#9650</th>
+    </tr>
+
+    <tbody id="myTable">
+
+    </tbody>
+
+</table>
+
+
+<script>
+var myArray = [
+    {'name':'Eka Desvi', 'number':'2115061001', 'birthdate':'Natar, 07-08-2003', 'address':'Natar'},
+    {'name':'Dwi Indah', 'number':'2115061002', 'birthdate':'Kalianda, 25-03-2003', 'address':'Bandar Lampung'},
+    {'name':'Ayu Rosita', 'number':'2115061003', 'birthdate':'Metro, 21-02-2003', 'address':'Bandar Lampung'},
+    {'name':'Vio Azelia', 'number':'2115061004', 'birthdate':'Natar, 18-09-2002', 'address':'Natar'},
+    {'name':'Evi Yanti', 'number':'2155061001', 'birthdate':'Bandar Lampung, 5-06-2003', 'address':'Gedong Tataan'},
+    {'name':'Bunga Alya', 'number':'2155061002', 'birthdate':'Kota Bumi, 10-01-2003', 'address':'Natar'},
+]
+
+
+$('#search-input').on('keyup', function(){
+    var value = $(this).val()
+    console.log ('Value:', value)
+    var data = searchTable(value, myArray)
+    buildTable(data)
+})
+
+
+buildTable(myArray)
+
+
+function searchTable(value, data){
+    var filteredData = []
+
+    for (var i = 0; i < data.length; i++){
+        value = value.toLowerCase()
+        var name = data[i].name.toLowerCase()
+
+        if (name.includes(value)){
+            filteredData.push(data[i])
+        }
+    
+    }
+
+   
+   return filteredData
+}
+
+
+
+function buildTable(data){
+
+    var table = document.getElementById('myTable')
+
+    table.innerHTML = ''
+
+    for (var i = 0; i < data.length; i++){
+
+        var row = `<tr>
+                        <td>${data[i].name}</td>
+                        <td>${data[i].number}</td>
+                        <td>${data[i].birthdate}</td>
+                        <td>${data[i].address}</td>
+                   </tr>`
+        table.innerHTML += row
+    }
+}
+
+</script> 
